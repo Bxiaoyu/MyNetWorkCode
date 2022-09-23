@@ -1,6 +1,8 @@
 # MyNetWorkCode
 
 ## 简介
+> 本仓库主要是自己的网络编程学习代码   
+
 ***一、环境***   
 1、Ubuntu 18.04   
 2、VSCode   
