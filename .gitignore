@@ -1,0 +1,9 @@
+# 忽略.o和.a文件，不忽略libyolanda.a
+*.[oa]
+！libyolanda.a
+
+# 忽略build文件
+build
+
+# 忽略.vscode
+.vscode
