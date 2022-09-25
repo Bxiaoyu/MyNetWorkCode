@@ -26,7 +26,7 @@
 ```bash
 AA@AA:~/code/xxx$ cd chap-7
 AA@AA:~/code/xxx/chap-7$ mkdir build && cd build
-AA@AA:~/code/xxx/chap-7/build$ cmake ..
+AA@AA:~/code/xxx/chap-7/build$ cmake ../
 AA@AA:~/code/xxx/chap-7/build$ make
 ```
 等待编译完成即可，然后运行可执行程序：
