@@ -9,6 +9,11 @@ Channel::Channel(int fd, int events, event_read_callback eventReadCallback, even
     this->data = data;
 }
 
+Channel::~Channel()
+{
+    
+}
+
 int Channel::write_event_is_enabled()
 {
     return this->events & EVENT_WRITE;

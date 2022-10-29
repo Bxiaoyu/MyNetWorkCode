@@ -26,7 +26,19 @@ EventLoop::EventLoop(char* name)
     yolanda_msgx("set poll as dispatcher, %s", thread_name);
     eventDispatcher = (EventDispatcher*)new PollDispatcher;
 #endif
-    // event_dispatcher_data = eventDispatcher
+    event_dispatcher_data = eventDispatcher->get_data();
+
+    // add the socketfd to event
+    owner_thread_id = pthread_self();
+    if(socketpair(AF_UNIX, SOCK_STREAM, 0, socketPair) < 0)
+    {
+        LOG_ERR("socketpair set fialed");
+    }
+    is_handle_pending = 0;
+    pending_head = nullptr;
+    pending_tail = nullptr;
+
+    // Channel chan(socketPair[1], EVENT_READ, handleWakeup, nullptr, (void*)this);
 }
 
 EventLoop::~EventLoop()

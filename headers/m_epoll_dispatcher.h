@@ -32,9 +32,9 @@ public:
 
     ~EpollDispatcher();
 
-    epoll_dispatcher_data get_data()
+    void* get_data()
     {
-        return m_data;
+        return (void*)&m_data;
     }
 
     /** 通知dispatcher新增一个channel事件*/
