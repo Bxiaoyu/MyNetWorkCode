@@ -39,7 +39,7 @@ public:
     // res: EVENT_READ | EVENT_READ等
     int channel_event_activate(int fd, int res);
 
-    int handleWakeup(void *data);
+    static int handleWakeup(void *data);
 
     pthread_t get_owner_thread_id() const
     {
@@ -80,7 +80,7 @@ private:
     pthread_t owner_thread_id;
     pthread_mutex_t mutex;
     pthread_cond_t cond;
-    int socketPair[2];
+    static int socketPair[2];
     char* thread_name;
 };
 

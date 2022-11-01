@@ -2,6 +2,7 @@
 #include "m_event_loop.h"
 #include "m_utils.h"
 
+
 EventLoop::EventLoop(char* name)
 {
     pthread_mutex_init(&mutex, NULL);
@@ -38,11 +39,28 @@ EventLoop::EventLoop(char* name)
     pending_head = nullptr;
     pending_tail = nullptr;
 
-    // Channel chan(socketPair[1], EVENT_READ, handleWakeup, nullptr, (void*)this);
+    Channel *chan = new Channel(socketPair[1], EVENT_READ, handleWakeup, nullptr, (void*)this);
+    this->event_loop_add_channel_event(socketPair[1], chan);
 }
 
 EventLoop::~EventLoop()
-{}
+{
+    if(channelMap != nullptr)
+    {
+        delete channelMap;
+    }
+
+    if(eventDispatcher != nullptr)
+    {
+        delete eventDispatcher;
+    }
+    
+    while(pending_head != nullptr)
+    {
+        delete pending_head->channel;
+        pending_head = pending_head->next;
+    }
+}
 
 int EventLoop::event_loop_handle_pending_channel()
 {

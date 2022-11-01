@@ -1,6 +1,7 @@
 #ifndef M_CHANNEL_H
 #define M_CHANNEL_H
 #include <iostream>
+#include <functional>
 #include "buffer.h"
 
 #define EVENT_TIMEOUT    0x01
@@ -10,6 +11,9 @@
 #define EVENT_WRITE    0x04
 /** Wait for a POSIX signal to be raised*/
 #define EVENT_SIGNAL    0x08
+
+// typedef int (*event_read_callback)(void* data);
+// typedef int (*event_write_callback)(void* data);
 
 class Channel
 {
@@ -46,6 +50,9 @@ public:
     {
         events = event;
     }
+
+private:
+    void channel_init(int fd, int events, event_read_callback eventReadCallback, event_write_callback eventWriteCallback, void* data);
 
 private:
     int fd;
